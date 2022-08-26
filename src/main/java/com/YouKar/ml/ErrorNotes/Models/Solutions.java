@@ -6,6 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Collection;
 
 
 import lombok.*;
@@ -33,4 +35,9 @@ public class Solutions {
     @Column(name = "temps_consacrer", nullable = false)
     private String temps_consacrer;
 
+    @OneToOne
+    private Problemes probleme;
+
+    @OneToMany(mappedBy = "solution")
+    private Collection<Commentaires> commentaire = new ArrayList<>();
 }

@@ -18,4 +18,12 @@ public class Commentaires {
     @Column(name = "date_commentaire")
     private Date date_commentaire;
 
+
+    @ManyToOne
+    private Utilisateurs utilisateur;
+
+    @ManyToOne
+    private Solutions solution;
+
+
 }
