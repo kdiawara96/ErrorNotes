@@ -1,5 +1,7 @@
 package com.YouKar.ml.ErrorNotes.Others;
 
 public enum Roles {
-    ADMIN, USER,User
+
+    ADMIN, USER
+
 }

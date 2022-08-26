@@ -1,5 +1,6 @@
 package com.YouKar.ml.ErrorNotes.Models;
 
+
 import lombok.Data;
 
 import javax.persistence.*;
@@ -16,4 +17,5 @@ public class Commentaires {
 
     @Column(name = "date_commentaire")
     private Date date_commentaire;
+
 }
