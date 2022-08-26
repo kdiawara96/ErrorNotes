@@ -1,5 +1,13 @@
 package com.YouKar.ml.ErrorNotes.Models;
 
+
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import java.sql.Date;
+
+
 import lombok.*;
 
 import javax.persistence.*;
@@ -24,4 +32,5 @@ public class Solutions {
 
     @Column(name = "temps_consacrer", nullable = false)
     private String temps_consacrer;
+
 }

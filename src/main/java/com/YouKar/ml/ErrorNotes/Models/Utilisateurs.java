@@ -1,5 +1,6 @@
 package com.YouKar.ml.ErrorNotes.Models;
 
+
 import com.YouKar.ml.ErrorNotes.Others.Etats;
 import com.YouKar.ml.ErrorNotes.Others.Roles;
 import lombok.Data;
