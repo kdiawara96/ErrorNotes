@@ -1,7 +1,9 @@
 package com.YouKar.ml.ErrorNotes.Models;
 
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -9,18 +11,24 @@ import java.util.Date;
 
 @Entity
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+
 public class Commentaires {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_commentaire;
+    private Long idc;
 
-    @Column(name = "date_commentaire")
-    private Date date_commentaire;
+    @Column(name = "description_commentaire", nullable = false)
+     private String description_commentaire;
+
+    @Column(name = "datecommentaire")
+    private Date datecommentaire;
 
 
     @ManyToOne
-    private Utilisateurs utilisateur;
+    private Personnes personnes;
 
     @ManyToOne
     private Solutions solution;

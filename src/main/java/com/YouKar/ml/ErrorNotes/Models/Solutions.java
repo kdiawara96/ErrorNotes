@@ -21,18 +21,21 @@ import javax.persistence.*;
 public class Solutions {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_solutions ;
+    private Long ids ;
+
+    @Column(name = "titre",length = 70, nullable = false, unique = true)
+    private String titre;
 
     @Column(name = "description_solution",length = 255, nullable = false)
     private String description_solution;
 
-    @Column(name = "methode_recherche", nullable = true)
+    @Column(name = "methode_recherche",length = 70, nullable = true)
     private String methode_recherche;
 
-    @Column(name = "ressource_solution",nullable = true)
+    @Column(name = "ressource_solution",length = 50,nullable = true)
     private String ressource_solution;
 
-    @Column(name = "temps_consacrer", nullable = false)
+    @Column(name = "temps_consacrer", length = 20, nullable = false)
     private String temps_consacrer;
 
     @OneToOne

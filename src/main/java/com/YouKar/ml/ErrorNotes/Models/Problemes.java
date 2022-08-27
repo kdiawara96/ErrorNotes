@@ -4,7 +4,6 @@ import com.YouKar.ml.ErrorNotes.Others.Etats;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.security.PrivateKey;
 
 
 @Entity
@@ -24,11 +23,11 @@ public class Problemes {
     @Column(name = "technologie",nullable = false,length = 50)
     private String technologie;
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
     private Etats etats;
 
     @ManyToOne
-    private Utilisateurs utilisateur;
+    private Personnes personnes;
 
     @OneToOne(mappedBy = "probleme")
     private Solutions solutions;
