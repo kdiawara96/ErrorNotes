@@ -70,7 +70,7 @@ public abstract class Personnes{
    // private Roles role;
 
 
-    @OneToMany(mappedBy = "personnes")
+    @OneToMany(mappedBy = "personnesp")
     private Collection<Problemes> probleme;
 
     @OneToMany(mappedBy = "personnes")

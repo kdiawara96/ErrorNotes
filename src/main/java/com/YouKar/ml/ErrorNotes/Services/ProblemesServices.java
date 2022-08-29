@@ -6,5 +6,5 @@ public interface ProblemesServices {
     
     public String DeleteProblemes(Long idp, String email);
     public Boolean Create(Problemes probleme, String email);
-    public Problemes Update(Long idp , Problemes problemes);
+    public Problemes Update(Long idp , Problemes problemes, String email);
 }

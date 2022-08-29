@@ -35,8 +35,14 @@ public class ProblemesImpl implements ProblemesServices {
 
     @Override
     public String DeleteProblemes(Long idp, String email) {
-        
-       if(personne.findByEmail(email)!= null){
+
+        Personnes r = personne.findByEmail(email);
+
+       Problemes verifier =  blem.findByPersonnesp(r);
+
+
+
+       if(verifier != null){
 
         blem.deleteById(idp);
 
@@ -54,20 +60,26 @@ public class ProblemesImpl implements ProblemesServices {
     public Boolean Create(Problemes probleme, String email) {
         
         Personnes perso = personne.findByEmail(email);
+
        // Problemes titrep = pro.findByTitre(titre);
 
-       
+          //verifier si le user == au meme user qui à poster le problème
+         // Personnes r = personne.findByEmail(email);
+        // Problemes verifier =  blem.findByPersonnesp(r);
 
-        if (personne.findByEmail(email) != null || sol.findByTitre(probleme.getTitrep()) != null){
+        if (personne.findByEmail(email)!= null && sol.findByTitre(probleme.getTitrep()) == null){
 
-            probleme.setPersonnes(perso);
+            probleme.setPersonnesp(perso);
             probleme.setEtats(Etats.INITIAL);
             probleme.setDatep(new Date());
+
             blem.save(probleme);
-             
+
             return true;
         }else{
+
     return false;
+
         }
     }
 
@@ -75,58 +87,63 @@ public class ProblemesImpl implements ProblemesServices {
 
 
     @Override
-    public Problemes Update(Long idp, Problemes problemes) {
+    public Problemes Update(Long idp, Problemes problemes, String email) {
 
-        return blem.findById(idp).map(p->{
-              p.setDatep(p.getDatep());
+        //verifier si le user == au meme user qui à poster le problème
+        Personnes r = personne.findByEmail(email);
+        Problemes verifier =  blem.findByPersonnesp(r);
 
-              if(problemes.getDescriptionp() ==null){
+        if (verifier != null){
+            Problemes probl = blem.findByIdp(idp);
 
-                p.setDescriptionp(p.getDescriptionp());
-          
-              }else{
-                  p.setDescriptionp(problemes.getDescriptionp());
-              }
+            return blem.findById(idp).map(p->{
+
+                p.setDatep(probl.getDatep());
+
+                if(problemes.getDescriptionp() ==null){
+                    p.setDescriptionp(p.getDescriptionp());
+
+                }else{
+                    p.setDescriptionp(problemes.getDescriptionp());
+                }
+
+
+                if(problemes.getEtats()==null){
+                    p.setEtats(p.getEtats());
+                }else{
+                    p.setEtats(problemes.getEtats());
+                }
+
+
+                if(problemes.getTechnologiep()==null){
+
+                    p.setTechnologiep(p.getTechnologiep());
+
+                }else{
+                    p.setTechnologiep(problemes.getTechnologiep());
+                }
 
 
 
-              if(problemes.getEtats()==null){
+                if(problemes.getTitrep()==null){
 
-                p.setEtats(p.getEtats());
-          
-              }else{
-                p.setEtats(problemes.getEtats());
-              }
-              
-              
+                    p.setTitrep(p.getTitrep());
 
-              if(problemes.getTechnologiep()==null){
+                }else{
+                    p.setTitrep(problemes.getTitrep());
+                }
 
-                p.setTechnologiep(p.getTechnologiep());
-          
-              }else{
-                p.setTechnologiep(problemes.getTechnologiep());
-              }
-              
-   
 
-              if(problemes.getTitrep()==null){
 
-                p.setTitrep(p.getTitrep());
-          
-              }else{
-                p.setTitrep(problemes.getTitrep());
-              }
-              
 
-             
-             
 
-    
-          return blem.save(p);
 
-        }).orElseThrow(()->new RuntimeException("Problème non trouver!"));
-   
+                return blem.save(p);
+
+            }).orElseThrow(()->new RuntimeException("Problème non trouver!"));
+        }
+
+   return null;
     }
     
 }

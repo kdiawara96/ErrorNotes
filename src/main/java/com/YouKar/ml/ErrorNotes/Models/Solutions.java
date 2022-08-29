@@ -5,9 +5,9 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 
 import lombok.*;
@@ -35,8 +35,14 @@ public class Solutions {
     @Column(name = "ressource_solution",length = 50,nullable = true)
     private String ressource_solution;
 
+    @Column(name="datesolution")
+    private Date datesolution;
+
     @Column(name = "temps_consacrer", length = 20, nullable = false)
-    private String temps_consacrer;
+    private long temps_consacrer;
+
+    @Column(name = "etoiles", length = 9)
+    private int etoiles;
 
     @OneToOne
     private Problemes probleme;

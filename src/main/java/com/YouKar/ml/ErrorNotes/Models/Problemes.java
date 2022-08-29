@@ -21,13 +21,13 @@ public class Problemes {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idp;
 
-    @Column(name = "titrep",nullable = false, length = 50)
+    @Column(name = "titrep",nullable = false, length = 50, unique = true)
     private String titrep;
 
-    @Column(name = "description", nullable = false)
+    @Column(name = "descriptionp", nullable = false)
     private String descriptionp;
 
-    @Column(name = "technologie",nullable = false,length = 50)
+    @Column(name = "technologiep",nullable = false,length = 50)
     private String technologiep;
 
     @Column(name = "datep",nullable = false)
@@ -38,7 +38,7 @@ public class Problemes {
     private Etats etats;
 
     @ManyToOne
-    private Personnes personnes;
+    private Personnes personnesp;
 
     @OneToOne(mappedBy = "probleme")
     private Solutions solutions;

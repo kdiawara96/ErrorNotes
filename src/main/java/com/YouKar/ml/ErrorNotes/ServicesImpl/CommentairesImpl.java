@@ -2,6 +2,7 @@ package com.YouKar.ml.ErrorNotes.ServicesImpl;
 
 import com.YouKar.ml.ErrorNotes.Models.Commentaires;
 import com.YouKar.ml.ErrorNotes.Models.Personnes;
+import com.YouKar.ml.ErrorNotes.Models.Problemes;
 import com.YouKar.ml.ErrorNotes.Models.Solutions;
 import com.YouKar.ml.ErrorNotes.Repository.Commentaires_repo;
 import com.YouKar.ml.ErrorNotes.Repository.Personnes_repo;
@@ -31,7 +32,10 @@ public class CommentairesImpl implements CommentaireService {
     @Override
     public String DeleteCommentaire(Long id_commentaire, String email) {
 
-        if(personne.findByEmail(email) != null){
+        Personnes r = personne.findByEmail(email);
+        Commentaires verifier =  repo.findByPersonnes(r);
+
+        if(verifier!= null){
             repo.deleteById(id_commentaire);
         }else{
            return null;
@@ -42,11 +46,15 @@ public class CommentairesImpl implements CommentaireService {
     @Override
     public Boolean Create(Commentaires commentaire, String email, String titre) {
 
+        Personnes r = personne.findByEmail(email);
+        Commentaires verifier =  repo.findByPersonnes(r);
+
         Personnes perso = personne.findByEmail(email);
         Solutions solu = sol.findByTitre(titre);
 
+      //tout le monde peux commenter les solutions
 
-       if (personne.findByEmail(email) != null || sol.findByTitre(titre) != null){
+       if (personne.findByEmail(email) != null || solu != null){
 
         commentaire.setSolution(solu);
         commentaire.setPersonnes(perso);
@@ -64,26 +72,33 @@ public class CommentairesImpl implements CommentaireService {
 
 
     @Override
-    public Commentaires Update(Long idc, Commentaires commentaire) {
-        
+    public Commentaires Update(Long idc, Commentaires commentaire,String email) {
+
+        Personnes r = personne.findByEmail(email);
+        Commentaires verifier =  repo.findByPersonnes(r);
+
         Commentaires com = repo.findByIdc(idc);
         //com.getDatecommentaire()
 
-        return repo.findById(idc).map(up->{
+        if (verifier != null){
+            return repo.findById(idc).map(up->{
 
-            
-            if(commentaire.getDescription_commentaire() == null){
 
-                up.setDescription_commentaire(up.getDescription_commentaire());
-       
-            }else{
-                up.setDescription_commentaire(commentaire.getDescription_commentaire());
-            }
-              // up.setDatecommentaire(commentaire.getDatecommentaire());
-            up.setDatecommentaire(up.getDatecommentaire());
-            return repo.save(up);
+                if(commentaire.getDescription_commentaire() == null){
 
-        }).orElseThrow(()->new RuntimeException("Commentaire non trouver!"));
+                    up.setDescription_commentaire(up.getDescription_commentaire());
+
+                }else{
+                    up.setDescription_commentaire(commentaire.getDescription_commentaire());
+                }
+                // up.setDatecommentaire(commentaire.getDatecommentaire());
+                up.setDatecommentaire(up.getDatecommentaire());
+                return repo.save(up);
+
+            }).orElseThrow(()->new RuntimeException("Commentaire non trouver!"));
+        }
+        return null;
+
     }
 
 }

@@ -11,13 +11,14 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/commentaire")
 @AllArgsConstructor
+
 public class CommentairesControllers {
 
     private CommentaireService service;
 
 
     @PostMapping("/create/{email}/{titre}")
-    public ResponseEntity<Object> creerCommentaire(Commentaires commentaire, @PathVariable("email") String email, @PathVariable("titre") String titre){
+    public ResponseEntity<Object> creerCommentaire(@RequestBody Commentaires commentaire, @PathVariable("email") String email, @PathVariable("titre") String titre){
 
         return Messages.Response("", HttpStatus.OK,service.Create(commentaire, email, titre));
     }
@@ -26,8 +27,14 @@ public class CommentairesControllers {
 
     @PutMapping("/update/{id}")
 
-    public Commentaires updateCommentaires(@PathVariable("idc") Long idc, Commentaires commentaires){
-        return service.Update(idc,commentaires);
+    public ResponseEntity<Object> updateCommentaires(@PathVariable("idc") Long idc, @RequestBody Commentaires commentaires, @PathVariable("email") String email){
+
+        try{
+           return Messages.Response("Modifier avec success", HttpStatus.OK, service.Update(idc,commentaires, email));
+        }catch(Exception e){
+            return Messages.Response("Erreur survenu lors de la modification du commentaire", HttpStatus.OK, null);
+        }
+
     }
 
 
