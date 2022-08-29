@@ -21,9 +21,11 @@ public class UsersControllers {
     @PostMapping("/create")
     public ResponseEntity<Object> AjouterUsers(@RequestBody Users users){
         try{
-            return Messages.Response("", HttpStatus.OK, userService.AjouterUsers(users));
-
+            System.err.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+            return Messages.Response("User is create", HttpStatus.OK, userService.AjouterUsers(users));
+                 
         }catch (Exception e){
+            System.err.println("erroorrrrrrrrrrrrrrrrrrrrrrrrrr");
             return Messages.Response("Error", HttpStatus.OK,null);
         }
     }

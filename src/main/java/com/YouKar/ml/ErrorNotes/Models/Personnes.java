@@ -1,15 +1,12 @@
 package com.YouKar.ml.ErrorNotes.Models;
 
 
-import com.YouKar.ml.ErrorNotes.Others.Etats;
-import com.YouKar.ml.ErrorNotes.Others.Roles;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Collection;
 
 //Nous avons trois manière de faire l'héritage, soite avec InheritanceType.SINGLE_TABLE

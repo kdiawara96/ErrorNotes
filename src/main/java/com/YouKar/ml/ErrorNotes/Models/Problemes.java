@@ -1,27 +1,38 @@
 package com.YouKar.ml.ErrorNotes.Models;
 
 import com.YouKar.ml.ErrorNotes.Others.Etats;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.Date;
 
 import javax.persistence.*;
 
 
 @Entity
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Problemes {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_problemes;
+    private Long idp;
 
-    @Column(name = "titre",nullable = false, length = 50)
-    private String titre_prolemes;
+    @Column(name = "titrep",nullable = false, length = 50)
+    private String titrep;
 
     @Column(name = "description", nullable = false)
-    private String description_problemes;
+    private String descriptionp;
 
     @Column(name = "technologie",nullable = false,length = 50)
-    private String technologie;
+    private String technologiep;
+
+    @Column(name = "datep",nullable = false)
+    private Date datep;
+
 
     @Enumerated(EnumType.ORDINAL)
     private Etats etats;
@@ -31,6 +42,10 @@ public class Problemes {
 
     @OneToOne(mappedBy = "probleme")
     private Solutions solutions;
+
+    public Object map(Object object) {
+        return null;
+    }
 
 
 

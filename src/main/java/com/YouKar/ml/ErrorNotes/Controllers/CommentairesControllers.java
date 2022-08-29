@@ -31,10 +31,15 @@ public class CommentairesControllers {
     }
 
 
-    @DeleteMapping("/deleteCommentaire/{idc}")
-    public String supprimerPays(@PathVariable("idc") Long idc){
-        
-        return service.DeleteCommentaire(idc);
-    }
+    @DeleteMapping("/deleteCommentaire/{idc}/{email}")
+    public ResponseEntity<Object> supprimerPays(@PathVariable("idc") Long idc, @PathVariable("email") String email){
+    
+        try {
+            return Messages.Response("Commentaire supprimer avec succès!", HttpStatus.OK, service.DeleteCommentaire(idc, email)) ;
+        }catch (Exception e) {
+            return Messages.Response("Commentaire non supprimer!", HttpStatus.OK,null) ;
 
+        }
+
+}
 }

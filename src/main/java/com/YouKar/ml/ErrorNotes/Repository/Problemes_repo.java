@@ -6,4 +6,9 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface Problemes_repo extends JpaRepository<Problemes, Long> {
+
+    public Problemes findByIdp(Long idp);
+
+    public Problemes findByTitrep(String titrep);
+
 }
