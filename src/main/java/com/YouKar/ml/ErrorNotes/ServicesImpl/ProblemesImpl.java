@@ -33,32 +33,33 @@ public class ProblemesImpl implements ProblemesServices {
     @Autowired
     private final Problemes_repo blem;
 
+
+
     @Override
-    public String DeleteProblemes(Long idp, String email) {
+    public String DeleteProblemes(String titre, String email) {
 
-        Personnes r = personne.findByEmail(email);
+       Personnes r = personne.findByEmail(email);
 
-       Problemes verifier =  blem.findByPersonnesp(r);
+       Problemes tit = blem.findByTitrep(titre);
 
+          long id =   tit.getPersonnesp().getId();
 
+       if( id == r.getId()){
 
-       if(verifier != null){
-
-        blem.deleteById(idp);
-
-        }else{
-            return null;
+            blem.deleteById(tit.getIdp());
+           return "Suppression";
+       }else{
+            return "Vous n'avez pas le droit de supprimer";
         }
-     
 
-        return null;
+
     }
 
 
 
     @Override
     public Boolean Create(Problemes probleme, String email) {
-        
+
         Personnes perso = personne.findByEmail(email);
 
        // Problemes titrep = pro.findByTitre(titre);
@@ -87,13 +88,24 @@ public class ProblemesImpl implements ProblemesServices {
 
 
     @Override
-    public Problemes Update(Long idp, Problemes problemes, String email) {
+    public Problemes Update(String titre, Problemes problemes, String email) {
 
         //verifier si le user == au meme user qui à poster le problème
-        Personnes r = personne.findByEmail(email);
-        Problemes verifier =  blem.findByPersonnesp(r);
+        /*Personnes r = personne.findByEmail(email);
+        Problemes verifier =  blem.findByPersonnesp(r);*/
 
-        if (verifier != null){
+
+        Personnes r = personne.findByEmail(email);
+
+        Problemes tit = blem.findByTitrep(titre);
+
+        long id =   tit.getPersonnesp().getId();
+
+        long idp =tit.getIdp();
+
+        if (id == r.getId()){
+
+
             Problemes probl = blem.findByIdp(idp);
 
             return blem.findById(idp).map(p->{
@@ -134,10 +146,6 @@ public class ProblemesImpl implements ProblemesServices {
                 }
 
 
-
-
-
-
                 return blem.save(p);
 
             }).orElseThrow(()->new RuntimeException("Problème non trouver!"));
@@ -145,5 +153,5 @@ public class ProblemesImpl implements ProblemesServices {
 
    return null;
     }
-    
+
 }

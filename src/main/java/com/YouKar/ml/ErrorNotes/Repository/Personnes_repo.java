@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface Personnes_repo extends JpaRepository<Personnes, Long> {
    // Personnes AjouterPersonne(Personnes personnes);
-    Personnes findByEmail(String email);
+    public Personnes findByEmail(String email);
 }

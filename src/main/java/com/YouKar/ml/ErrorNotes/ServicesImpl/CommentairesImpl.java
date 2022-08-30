@@ -30,18 +30,32 @@ public class CommentairesImpl implements CommentaireService {
 
 
     @Override
-    public String DeleteCommentaire(Long id_commentaire, String email) {
+    public String DeleteCommentaire(Long idc, String email) {
 
-        Personnes r = personne.findByEmail(email);
+      /*  Personnes r = personne.findByEmail(email);
         Commentaires verifier =  repo.findByPersonnes(r);
 
         if(verifier!= null){
-            repo.deleteById(id_commentaire);
+*/
+            Personnes r = personne.findByEmail(email);
+
+            long idcc =  r.getId();
+
+            Commentaires idp =  repo.findByIdc(idc);
+
+            long idpp = idp.getPersonnes().getId();
+
+
+            if (idcc == idpp){
+            repo.deleteById(idc);
         }else{
            return null;
         }
     return "";
     }
+
+
+
 
     @Override
     public Boolean Create(Commentaires commentaire, String email, String titre) {
@@ -71,16 +85,23 @@ public class CommentairesImpl implements CommentaireService {
     }
 
 
+
+
     @Override
     public Commentaires Update(Long idc, Commentaires commentaire,String email) {
 
         Personnes r = personne.findByEmail(email);
-        Commentaires verifier =  repo.findByPersonnes(r);
 
-        Commentaires com = repo.findByIdc(idc);
-        //com.getDatecommentaire()
 
-        if (verifier != null){
+      long idcc =  r.getId();
+
+       Commentaires idp =  repo.findByIdc(idc);
+
+       long idpp = idp.getPersonnes().getId();
+
+
+        if (idcc == idpp){
+
             return repo.findById(idc).map(up->{
 
 
@@ -89,10 +110,14 @@ public class CommentairesImpl implements CommentaireService {
                     up.setDescription_commentaire(up.getDescription_commentaire());
 
                 }else{
+
                     up.setDescription_commentaire(commentaire.getDescription_commentaire());
+
                 }
+
                 // up.setDatecommentaire(commentaire.getDatecommentaire());
-                up.setDatecommentaire(up.getDatecommentaire());
+
+                up.setDatecommentaire(new Date());
                 return repo.save(up);
 
             }).orElseThrow(()->new RuntimeException("Commentaire non trouver!"));
@@ -100,5 +125,9 @@ public class CommentairesImpl implements CommentaireService {
         return null;
 
     }
+
+
+
+
 
 }

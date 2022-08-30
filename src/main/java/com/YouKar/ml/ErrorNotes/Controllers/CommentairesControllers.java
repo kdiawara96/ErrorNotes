@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/commentaire")
+@RequestMapping("/commentaires")
 @AllArgsConstructor
 
 public class CommentairesControllers {
@@ -25,7 +25,7 @@ public class CommentairesControllers {
 
 
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/update/{idc}/{email}")
 
     public ResponseEntity<Object> updateCommentaires(@PathVariable("idc") Long idc, @RequestBody Commentaires commentaires, @PathVariable("email") String email){
 
@@ -38,7 +38,8 @@ public class CommentairesControllers {
     }
 
 
-    @DeleteMapping("/deleteCommentaire/{idc}/{email}")
+
+    @DeleteMapping("/delete/{idc}/{email}")
     public ResponseEntity<Object> supprimerPays(@PathVariable("idc") Long idc, @PathVariable("email") String email){
     
         try {

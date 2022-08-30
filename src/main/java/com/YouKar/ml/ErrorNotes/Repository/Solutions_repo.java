@@ -11,4 +11,5 @@ public interface Solutions_repo extends JpaRepository<Solutions, Long> {
 
     Solutions findByTitre(String titre);
     Solutions findByProbleme(Problemes problemes);
+    Solutions findByIds(Long ids);
 }

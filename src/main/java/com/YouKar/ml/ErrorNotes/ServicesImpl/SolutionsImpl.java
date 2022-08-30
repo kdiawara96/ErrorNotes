@@ -35,13 +35,22 @@ public class SolutionsImpl implements SolutionServices {
 
 
     @Override
-    public String DeleteSolution(Long id, String email) {
-       
+    public String DeleteSolution(String titre, String email) {
+
         Personnes r = personne.findByEmail(email);
 
-        Problemes verifier =  blem.findByPersonnesp(r);
-      if (verifier != null) {
-        sol.deleteById(id);     
+        Problemes tit = blem.findByTitrep(titre);
+
+        Solutions ttt = sol.findByTitre(titre);
+
+       long id = ttt.getProbleme().getPersonnesp().getId();
+       // long id =   tit.getPersonnesp().getId();
+
+        long ids = ttt.getIds();
+
+
+      if (id == r.getId()) {
+        sol.deleteById(ids);
     
     }else{
         return null;
@@ -54,17 +63,31 @@ public class SolutionsImpl implements SolutionServices {
     public Boolean Create(Solutions solution, String email, String titre) {
 
 
-        Problemes r =   blem.findByTitrep(titre);
+        Personnes r = personne.findByEmail(email);
 
-       String verifier =  r.getPersonnesp().getEmail();
+        Problemes tit = blem.findByTitrep(titre);
 
-        Solutions solu = sol.findByProbleme(r);
+        long id =   tit.getPersonnesp().getId();
 
-       if (email.equals(verifier) && solu == null){
+        long idp =tit.getIdp();
+
+
+
+
+
+        Problemes rr =   blem.findByTitrep(titre);
+
+       //String verifier =  rr.getPersonnesp().getEmail();
+
+        Solutions solu = sol.findByProbleme(rr);
+
+
+
+        if (id == r.getId() && solu == null){
 
            solution.setDatesolution(new Date());
 
-           Date dateProbleme =  r.getDatep();
+           Date dateProbleme =  rr.getDatep();
 
            Date newdate = new Date();
 
@@ -74,31 +97,36 @@ public class SolutionsImpl implements SolutionServices {
            final long jour = heure * 24;
             final long annee = jour * 365;
 
-           /*  long l = 0;
+            long l = 0;
 
-          long dateannes = (newdate.getTime() - dateProbleme.getTime())/annee;
-           long datemois = (newdate.getTime() - dateProbleme.getTime())/jour/30;
-           long datejours = (newdate.getTime() - dateProbleme.getTime())/jour;
-           long dateheures = (newdate.getTime() - dateProbleme.getTime())/heure;
-           long dateminutes = (newdate.getTime() - dateProbleme.getTime())/heure/60;
+          long dateannes = (newdate.getTime() - dateProbleme.getTime())/86400000*30*365;
+           long datemois = (newdate.getTime() - dateProbleme.getTime())/86400000*30;
+           long datejours = (newdate.getTime() - dateProbleme.getTime())/86400000;
+           long dateheures = (newdate.getTime() - dateProbleme.getTime())/3600000;
+           long dateminutes = (newdate.getTime() - dateProbleme.getTime())/60000;
 
-
-           if(dateannes > 0  ){
+            if(dateannes >= 1  ){
                l=dateannes;
+               solution.setTemps_consacrer(l+" ANNEES");
            }else{
-               if (datemois > 0){
+               if (datemois >= 1){
                    l=datemois;
+                   solution.setTemps_consacrer(l+" MOIS");
                }else{
-                   if (datejours > 0){
+                   if (datejours >= 1){
                        l=datejours;
+                       solution.setTemps_consacrer(l+" JOURS");
                    }else{
-                       if (dateheures > 0){
+                       if (dateheures >= 1){
                            l=dateheures;
+                           solution.setTemps_consacrer(l+" HEURES");
                        }else{
-                           if (dateminutes > 0){
+                           if (dateminutes >= 1){
                                l=dateminutes;
+                               solution.setTemps_consacrer(l+" MINUTES");
                            }else{
-                               System.err.println("Erreur d'heure");
+                               System.err.println(newdate.getTime() - dateProbleme.getTime()+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+                               solution.setTemps_consacrer(l+" SECONDES");
                            }
                        }
 
@@ -106,16 +134,16 @@ public class SolutionsImpl implements SolutionServices {
 
                }
            }
+
+
+
+          /* long l = (newdate.getTime() - dateProbleme.getTime())/(1000 * 60);
+
+           solution.setTemps_consacrer(l+" MINUTES");
            */
+           solution.setProbleme(rr);
 
-
-           long l = (newdate.getTime() - dateProbleme.getTime())/heure/60;
-
-
-           System.err.println(l);
-
-           solution.setTemps_consacrer(l);
-           solution.setProbleme(r);
+           //solution.setEtoiles(solution.getEtoiles());
 
            sol.save(solution);
 
@@ -126,8 +154,70 @@ public class SolutionsImpl implements SolutionServices {
         return null;
     }
 
+
+
     @Override
-    public Solutions Update(Long id, Solutions solution, String email) {
+    public Solutions Update(String titre, Solutions solution, String email) {
+
+
+        Personnes r = personne.findByEmail(email);
+
+        Problemes tit = blem.findByTitrep(titre);
+
+        long id =   tit.getPersonnesp().getId();
+
+        long idp =tit.getIdp();
+
+
+
+
+       // Personnes r = personne.findByEmail(email);
+       // Problemes verifier =  blem.findByPersonnesp(r);
+
+
+        if (id == r.getId()){
+
+          Solutions tion = sol.findByIds(id);
+
+          return sol.findById(id).map(p->{
+
+                 if (solution.getTitre() != null){
+                     p.setTitre(solution.getTitre());
+                 }else{
+                     p.setTitre(p.getTitre());
+                 }
+
+              if (solution.getDescription_solution() != null){
+                  p.setDescription_solution(solution.getDescription_solution());
+              }else{
+                  p.setDescription_solution(p.getDescription_solution());
+              }
+
+              if (solution.getRessource_solution() != null){
+                  p.setRessource_solution(solution.getRessource_solution());
+              }else{
+                  p.setRessource_solution(p.getRessource_solution());
+              }
+
+              if (solution.getMethode_recherche() != null){
+                  p.setMethode_recherche(solution.getMethode_recherche());
+              }else{
+                  p.setMethode_recherche(p.getMethode_recherche());
+              }
+
+
+
+              p.setEtoiles(p.getEtoiles());
+
+              p.setTemps_consacrer(p.getTemps_consacrer());
+
+              p.setDatesolution(p.getDatesolution());
+
+
+          return sol.save(p);
+
+          }).orElseThrow(()->new RuntimeException("Solution non trouver!"));
+        }
         return null;
     }
 

@@ -34,10 +34,9 @@ public class ProblemesControllers {
 
             }
 
-            @PutMapping("/update/{idp}/{email}")
-    public Boolean modifierProblème( @PathVariable("idp") Long idp, @RequestBody Problemes probleme, @PathVariable("email") String email){
-                service.Update(idp,probleme, email);
-
+            @PutMapping("/update/{titre}/{email}")
+    public Boolean modifierProblème( @PathVariable("titre") String titre, @RequestBody Problemes probleme, @PathVariable("email") String email){
+                service.Update(titre,probleme, email);
             return null;
 
       /*  try{
@@ -48,17 +47,19 @@ public class ProblemesControllers {
 */
             }
 
-            @DeleteMapping("/delete/{idp}/{email}")
 
-            public  ResponseEntity<Object> suppression(@PathVariable("idp") Long idp, @PathVariable("email") String email){
+            @DeleteMapping("/delete/{titre}/{email}")
+
+            public  ResponseEntity<Object> suppression(@PathVariable("titre") String titre, @PathVariable("email") String email){
         try{
-           return Messages.Response("Supprimer avec success !",HttpStatus.OK, service.DeleteProblemes(idp, email));
+           return Messages.Response(null,HttpStatus.OK, service.DeleteProblemes(titre, email));
         }catch (Exception e){
-            return Messages.Response("Problèmes de suppression du problème!", HttpStatus.OK, null);
+            return Messages.Response("Problèmes de suppression!", HttpStatus.OK, null);
 
         }
 
             }
+
 
 
 

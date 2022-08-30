@@ -43,9 +43,9 @@ public class Problemes {
     @OneToOne(mappedBy = "probleme")
     private Solutions solutions;
 
-    public Object map(Object object) {
-        return null;
-    }
+    //public Object map(Object object) {
+      //  return null;
+    //}
 
 
 
