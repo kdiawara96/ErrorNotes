@@ -36,7 +36,16 @@ public class SolutionsImpl implements SolutionServices {
 
     @Override
     public String DeleteSolution(Long id, String email) {
+       
+        Personnes r = personne.findByEmail(email);
 
+        Problemes verifier =  blem.findByPersonnesp(r);
+      if (verifier != null) {
+        sol.deleteById(id);     
+    
+    }else{
+        return null;
+    }
         return null;
     }
 
