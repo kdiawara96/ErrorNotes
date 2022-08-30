@@ -154,4 +154,11 @@ public class ProblemesImpl implements ProblemesServices {
    return null;
     }
 
+
+    @Override
+    public Problemes recherche(String recherche) {
+
+        return null;
+    }
+
 }

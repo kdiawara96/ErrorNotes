@@ -7,4 +7,5 @@ public interface ProblemesServices {
     public String DeleteProblemes(String titre, String email);
     public Boolean Create(Problemes probleme, String email);
     public Problemes Update(String titre , Problemes problemes, String email);
+    public Problemes recherche(String recherche);
 }
