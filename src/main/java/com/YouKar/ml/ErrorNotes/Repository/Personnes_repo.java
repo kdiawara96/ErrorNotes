@@ -13,6 +13,9 @@ import java.util.List;
 public interface Personnes_repo extends JpaRepository<Personnes, Long> {
    // Personnes AjouterPersonne(Personnes personnes);
     public Personnes findByEmail(String email);
+    public Personnes findByPassword(String password);
+    //public Personnes findByIdpersonnes(Long id);
+
 
 
 }

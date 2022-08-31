@@ -43,13 +43,13 @@ public class SolutionsImpl implements SolutionServices {
 
         Solutions ttt = sol.findByTitre(titre);
 
-       long id = ttt.getProbleme().getPersonnesp().getId();
+       long id = ttt.getProbleme().getPersonnesp().getIdpersonnes();
        // long id =   tit.getPersonnesp().getId();
 
         long ids = ttt.getIds();
 
 
-      if (id == r.getId()) {
+      if (id == r.getIdpersonnes()) {
         sol.deleteById(ids);
     
     }else{
@@ -67,7 +67,7 @@ public class SolutionsImpl implements SolutionServices {
 
         Problemes tit = blem.findByTitrep(titre);
 
-        long id =   tit.getPersonnesp().getId();
+        long id =   tit.getPersonnesp().getIdpersonnes();
 
         long idp =tit.getIdp();
 
@@ -83,7 +83,7 @@ public class SolutionsImpl implements SolutionServices {
 
 
 
-        if (id == r.getId() && solu == null){
+        if (id == r.getIdpersonnes() && solu == null){
 
            solution.setDatesolution(new Date());
 
@@ -164,7 +164,7 @@ public class SolutionsImpl implements SolutionServices {
 
         Problemes tit = blem.findByTitrep(titre);
 
-        long id =   tit.getPersonnesp().getId();
+        long id =   tit.getPersonnesp().getIdpersonnes();
 
         long idp =tit.getIdp();
 
@@ -175,7 +175,7 @@ public class SolutionsImpl implements SolutionServices {
        // Problemes verifier =  blem.findByPersonnesp(r);
 
 
-        if (id == r.getId()){
+        if (id == r.getIdpersonnes()){
 
           Solutions tion = sol.findByIds(id);
 

@@ -1,6 +1,7 @@
 package com.YouKar.ml.ErrorNotes.ServicesImpl;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,9 +43,9 @@ public class ProblemesImpl implements ProblemesServices {
 
        Problemes tit = blem.findByTitrep(titre);
 
-          long id =   tit.getPersonnesp().getId();
+          long id =   tit.getPersonnesp().getIdpersonnes();
 
-       if( id == r.getId()){
+       if( id == r.getIdpersonnes()){
 
             blem.deleteById(tit.getIdp());
            return "Suppression";
@@ -99,11 +100,11 @@ public class ProblemesImpl implements ProblemesServices {
 
         Problemes tit = blem.findByTitrep(titre);
 
-        long id =   tit.getPersonnesp().getId();
+        long id =   tit.getPersonnesp().getIdpersonnes();
 
         long idp =tit.getIdp();
 
-        if (id == r.getId()){
+        if (id == r.getIdpersonnes()){
 
 
             Problemes probl = blem.findByIdp(idp);
@@ -154,11 +155,22 @@ public class ProblemesImpl implements ProblemesServices {
    return null;
     }
 
-
     @Override
-    public Problemes recherche(String recherche) {
+    public List<Object> recherche(String recherche) {
 
-        return null;
+        List<Object> resultat = blem.recherche(recherche);
+
+        if (recherche != null) {
+            System.out.println(resultat);
+            if (resultat != null) {
+                System.out.println("liste vide");
+            } else {
+                System.out.println("aucun probleme trouvé ");
+            }
+        }
+        return resultat;
     }
+
+
 
 }

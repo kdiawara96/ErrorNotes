@@ -39,11 +39,11 @@ public class CommentairesImpl implements CommentaireService {
 */
             Personnes r = personne.findByEmail(email);
 
-            long idcc =  r.getId();
+            long idcc =  r.getIdpersonnes();
 
             Commentaires idp =  repo.findByIdc(idc);
 
-            long idpp = idp.getPersonnes().getId();
+            long idpp = idp.getPersonnes().getIdpersonnes();
 
 
             if (idcc == idpp){
@@ -93,11 +93,11 @@ public class CommentairesImpl implements CommentaireService {
         Personnes r = personne.findByEmail(email);
 
 
-      long idcc =  r.getId();
+      long idcc =  r.getIdpersonnes();
 
        Commentaires idp =  repo.findByIdc(idc);
 
-       long idpp = idp.getPersonnes().getId();
+       long idpp = idp.getPersonnes().getIdpersonnes();
 
 
         if (idcc == idpp){

@@ -1,5 +1,6 @@
 package com.YouKar.ml.ErrorNotes.Controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,12 +11,15 @@ import com.YouKar.ml.ErrorNotes.Services.ProblemesServices;
 
 import lombok.AllArgsConstructor;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/problemes")
 @AllArgsConstructor
 
 public class ProblemesControllers {
 
+    @Autowired
     private ProblemesServices service;
 
 
@@ -59,6 +63,12 @@ public class ProblemesControllers {
         }
 
             }
+
+    @GetMapping("/recherche/{recherche}")
+    List<Object> recherche(@PathVariable("recherche") String recherche){
+
+        return service.recherche(recherche);
+    }
 
 
 

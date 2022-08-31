@@ -45,11 +45,11 @@ import java.util.Collection;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public abstract class Personnes{
+public class Personnes{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private  Long id;
+    private  Long idpersonnes;
 
     @Column(name = "nom", nullable = false, length = 25)
     private String nom;
