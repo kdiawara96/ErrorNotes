@@ -1,6 +1,7 @@
 package com.YouKar.ml.ErrorNotes.ServicesImpl;
 
 import com.YouKar.ml.ErrorNotes.Models.Personnes;
+import com.YouKar.ml.ErrorNotes.Others.Roles;
 import com.YouKar.ml.ErrorNotes.Repository.Personnes_repo;
 import com.YouKar.ml.ErrorNotes.Services.PersonnesServices;
 import lombok.AllArgsConstructor;
@@ -28,6 +29,19 @@ public class PersonnesImpl implements PersonnesServices {
         }else {
             return null;
         }
+
+    }
+
+    @Override
+    public String DeleteUser(Long id, String email) {
+
+        Personnes mail = repo.findByEmail(email);
+     if (mail != null && mail.getStatus()== Roles.ADMIN ){
+         repo.deleteById(id);
+         return "Supprimer avec succès!";
+     }else{
+         return "User non supprimer!";
+     }
 
     }
 }

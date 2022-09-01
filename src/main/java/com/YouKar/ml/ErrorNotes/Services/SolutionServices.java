@@ -8,4 +8,6 @@ public interface SolutionServices {
     public String DeleteSolution(String titre, String email);
     public Boolean Create(Solutions solution, String email, String titre);
     public Solutions Update(String titre , Solutions solution, String email);
+
+
 }

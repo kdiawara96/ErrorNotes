@@ -2,6 +2,7 @@ package com.YouKar.ml.ErrorNotes.ServicesImpl;
 
 import com.YouKar.ml.ErrorNotes.Models.Admins;
 import com.YouKar.ml.ErrorNotes.Others.Messages;
+import com.YouKar.ml.ErrorNotes.Others.Roles;
 import com.YouKar.ml.ErrorNotes.Repository.Personnes_repo;
 import com.YouKar.ml.ErrorNotes.Services.AdminsServices;
 import com.YouKar.ml.ErrorNotes.Services.PersonnesServices;
@@ -30,6 +31,7 @@ public class AdminsImpl implements AdminsServices {
         admin.setPrenom(admins.getPrenom());
         admin.setContact(admins.getContact());
         admin.setEmail(admins.getEmail());
+        admin.setStatus(Roles.ADMIN);
 
 
           int a = admins.getPassword().length();

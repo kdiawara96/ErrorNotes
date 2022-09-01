@@ -1,6 +1,7 @@
 package com.YouKar.ml.ErrorNotes.Models;
 
 
+import com.YouKar.ml.ErrorNotes.Others.Roles;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -66,8 +67,8 @@ public class Personnes{
     @Column(name = "password", nullable = false, length = 50)
     private String password;
 
-    //@Enumerated(EnumType.STRING)
-   // private Roles role;
+    @Enumerated(EnumType.ORDINAL)
+    private Roles status;
 
 
     @OneToMany(mappedBy = "personnesp")

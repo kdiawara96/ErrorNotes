@@ -26,6 +26,8 @@ public class Commentaires {
     @Column(name = "datecommentaire")
     private Date datecommentaire;
 
+    @Column(name = "aimer", nullable = true)
+    private boolean aimer;
 
     @ManyToOne
     private Personnes personnes;

@@ -66,9 +66,42 @@ public class CommentairesImpl implements CommentaireService {
         Personnes perso = personne.findByEmail(email);
         Solutions solu = sol.findByTitre(titre);
 
+
+
+
       //tout le monde peux commenter les solutions
 
        if (personne.findByEmail(email) != null || solu != null){
+
+           //Ajouter un à étoile de solution si user donne true comme valeur en commentaire
+
+           long ids =solu.getIds();
+
+           if (commentaire.isAimer()){
+
+               solu.setEtoiles(solu.getEtoiles()+1);
+
+              // int a = solu.getEtoiles();
+
+               //int value = a+1;
+
+              // System.err.println("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz "+ids);
+
+
+               //sol.addOrSousEtoile(value,ids);
+
+           }else {
+               solu.setEtoiles(solu.getEtoiles()+1);
+
+              // int a = solu.getEtoiles();
+
+               //int value = a-1;
+
+               //sol.addOrSousEtoile(value,ids);
+           }
+
+           sol.save(solu);
+        // Fin instruction
 
         commentaire.setSolution(solu);
         commentaire.setPersonnes(perso);
@@ -114,6 +147,8 @@ public class CommentairesImpl implements CommentaireService {
                     up.setDescription_commentaire(commentaire.getDescription_commentaire());
 
                 }
+
+
 
                 // up.setDatecommentaire(commentaire.getDatecommentaire());
 

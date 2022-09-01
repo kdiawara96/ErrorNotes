@@ -41,8 +41,8 @@ public class Solutions {
     @Column(name = "temps_consacrer", length = 50, nullable = false)
     private String temps_consacrer;
 
-    @Column(name = "etoiles", length = 9)
-    private int etoiles;
+    @Column(name = "etoiles", length = 9, nullable = true)
+    private int etoiles = 1;
 
     @OneToOne
     private Problemes probleme;

@@ -2,14 +2,9 @@ package com.YouKar.ml.ErrorNotes.Controllers;
 
 
 import com.YouKar.ml.ErrorNotes.Models.Personnes;
-import com.YouKar.ml.ErrorNotes.Models.Problemes;
-import com.YouKar.ml.ErrorNotes.Others.Messages;
 import com.YouKar.ml.ErrorNotes.Services.PersonnesServices;
-import com.YouKar.ml.ErrorNotes.Services.ProblemesServices;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -25,5 +20,12 @@ public class PersonnesControllers {
        return service.connexion(email, password);
         }
 
+
+    @DeleteMapping("/deleteUser/{id}/{email}")
+    public String deleteUser(@PathVariable("id") long id, @PathVariable("email") String email){
+
+                service.DeleteUser(id,email);
+                return "ok";
+    }
 
 }

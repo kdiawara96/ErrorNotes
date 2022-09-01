@@ -1,6 +1,7 @@
 package com.YouKar.ml.ErrorNotes.ServicesImpl;
 
 import com.YouKar.ml.ErrorNotes.Models.Users;
+import com.YouKar.ml.ErrorNotes.Others.Roles;
 import com.YouKar.ml.ErrorNotes.Repository.Personnes_repo;
 import com.YouKar.ml.ErrorNotes.Repository.Users_repo;
 import com.YouKar.ml.ErrorNotes.Services.UsersServices;
@@ -30,7 +31,7 @@ public class UsersImpl implements UsersServices{
         user.setPrenom(users.getPrenom());
         user.setContact(users.getContact());
         user.setEmail(users.getEmail());
-
+        user.setStatus(Roles.USER);
 
         int a = users.getPassword().length();
 

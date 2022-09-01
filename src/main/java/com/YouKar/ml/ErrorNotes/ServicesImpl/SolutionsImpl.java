@@ -44,6 +44,7 @@ public class SolutionsImpl implements SolutionServices {
         Solutions ttt = sol.findByTitre(titre);
 
        long id = ttt.getProbleme().getPersonnesp().getIdpersonnes();
+
        // long id =   tit.getPersonnesp().getId();
 
         long ids = ttt.getIds();
@@ -125,8 +126,7 @@ public class SolutionsImpl implements SolutionServices {
                                l=dateminutes;
                                solution.setTemps_consacrer(l+" MINUTES");
                            }else{
-                               System.err.println(newdate.getTime() - dateProbleme.getTime()+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-                               solution.setTemps_consacrer(l+" SECONDES");
+                                       solution.setTemps_consacrer(l+" SECONDES");
                            }
                        }
 
@@ -160,14 +160,14 @@ public class SolutionsImpl implements SolutionServices {
     public Solutions Update(String titre, Solutions solution, String email) {
 
 
-        Personnes r = personne.findByEmail(email);
+    /*    Personnes r = personne.findByEmail(email);
 
         Problemes tit = blem.findByTitrep(titre);
 
         long id =   tit.getPersonnesp().getIdpersonnes();
 
         long idp =tit.getIdp();
-
+*/
 
 
 
@@ -175,11 +175,25 @@ public class SolutionsImpl implements SolutionServices {
        // Problemes verifier =  blem.findByPersonnesp(r);
 
 
+        Personnes r = personne.findByEmail(email);
+
+        Problemes tit = blem.findByTitrep(titre);
+
+        Solutions ttt = sol.findByTitre(titre);
+
+        long id = ttt.getProbleme().getPersonnesp().getIdpersonnes();
+
+
+
+        long ids = ttt.getIds();
+
+
+
         if (id == r.getIdpersonnes()){
 
-          Solutions tion = sol.findByIds(id);
+         // Solutions tion = sol.findByIds(id);
 
-          return sol.findById(id).map(p->{
+          return sol.findById(ids).map(p->{
 
                  if (solution.getTitre() != null){
                      p.setTitre(solution.getTitre());
