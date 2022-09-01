@@ -16,6 +16,6 @@ public interface Personnes_repo extends JpaRepository<Personnes, Long> {
     public Personnes findByPassword(String password);
     //public Personnes findByIdpersonnes(Long id);
 
-
+    Personnes findByEmailAndPassword(String email, String password);
 
 }

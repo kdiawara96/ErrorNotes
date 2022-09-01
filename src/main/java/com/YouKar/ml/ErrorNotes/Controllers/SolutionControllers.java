@@ -18,20 +18,20 @@ import org.springframework.web.bind.annotation.*;
 public class SolutionControllers {
     private SolutionServices  service;
 
-    @PostMapping("/create/{email}/{titre}")
-    public ResponseEntity<Object> ajouterSolution(@RequestBody Solutions solution, @PathVariable("email") String email, @PathVariable("titre") String titre){
+    @PostMapping("/create/{email}/{password}/{titre}")
+    public ResponseEntity<Object> ajouterSolution(@RequestBody Solutions solution, @PathVariable("email") String email, @PathVariable("titre") String titre , @PathVariable("password") String password){
         try {
-            return Messages.Response(null, HttpStatus.OK, service.Create(solution, email,titre));
+            return Messages.Response(null, HttpStatus.OK, service.Create(solution, email,password,titre));
         }catch (Exception e){
-            return Messages.Response("Problème non commenter", HttpStatus.OK, service.Create(solution, email,titre));
+            return Messages.Response("Problème non commenter", HttpStatus.OK, null);
         }
     }
 
 
-    @DeleteMapping("/delete/{titre}/{email}")
-    public  ResponseEntity<Object> suppression(@PathVariable("titre") String titre, @PathVariable("email") String email){
+    @DeleteMapping("/delete/{titre}/{email}/{password}")
+    public  ResponseEntity<Object> suppression(@PathVariable("titre") String titre, @PathVariable("email") String email, @PathVariable("password") String password){
         try{
-            return Messages.Response(null,HttpStatus.OK, service.DeleteSolution(titre, email));
+            return Messages.Response(null,HttpStatus.OK, service.DeleteSolution(titre, email,password));
         }catch (Exception e){
             return Messages.Response("Problèmes de suppression du problème!", HttpStatus.OK, null);
 
@@ -39,9 +39,9 @@ public class SolutionControllers {
 
     }
 
-    @PutMapping("/update/{titre}/{email}")
-    public Boolean modifierSolution(@PathVariable("titre") String titre, @RequestBody Solutions solution, @PathVariable("email") String email){
-        service.Update(titre,solution, email);
+    @PutMapping("/update/{titre}/{email}/{password}")
+    public Boolean modifierSolution(@PathVariable("titre") String titre, @RequestBody Solutions solution, @PathVariable("email") String email, @PathVariable("password") String password){
+        service.Update(titre,solution, email, password);
 
         return null;
 

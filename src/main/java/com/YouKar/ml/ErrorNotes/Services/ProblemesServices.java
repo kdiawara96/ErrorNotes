@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface ProblemesServices {
     
-    public String DeleteProblemes(String titre, String email);
-    public Boolean Create(Problemes probleme, String email);
-    public Problemes Update(String titre , Problemes problemes, String email);
+    public String DeleteProblemes(String titre, String email, String password);
+    public Boolean Create(Problemes probleme, String email, String password);
+    public Problemes Update(String titre , Problemes problemes, String email, String password);
 
 
     List<Object> recherche(String recherche);

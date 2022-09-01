@@ -30,13 +30,15 @@ public class CommentairesImpl implements CommentaireService {
 
 
     @Override
-    public String DeleteCommentaire(Long idc, String email) {
+    public String DeleteCommentaire(Long idc, String email, String password) {
 
       /*  Personnes r = personne.findByEmail(email);
         Commentaires verifier =  repo.findByPersonnes(r);
 
         if(verifier!= null){
 */
+
+
             Personnes r = personne.findByEmail(email);
 
             long idcc =  r.getIdpersonnes();
@@ -46,19 +48,21 @@ public class CommentairesImpl implements CommentaireService {
             long idpp = idp.getPersonnes().getIdpersonnes();
 
 
-            if (idcc == idpp){
+            if (idcc == idpp && r.getPassword().equals(password)){
+
             repo.deleteById(idc);
+            return "Supprimer avec success!";
         }else{
-           return null;
+           return "Commentaire non supprimer!";
         }
-    return "";
+
     }
 
 
 
 
     @Override
-    public Boolean Create(Commentaires commentaire, String email, String titre) {
+    public Boolean Create(Commentaires commentaire, String email, String titre, String password) {
 
         Personnes r = personne.findByEmail(email);
         Commentaires verifier =  repo.findByPersonnes(r);
@@ -71,7 +75,7 @@ public class CommentairesImpl implements CommentaireService {
 
       //tout le monde peux commenter les solutions
 
-       if (personne.findByEmail(email) != null || solu != null){
+       if (personne.findByEmail(email) != null || solu != null && r.getPassword().equals(password)){
 
            //Ajouter un à étoile de solution si user donne true comme valeur en commentaire
 
@@ -121,7 +125,7 @@ public class CommentairesImpl implements CommentaireService {
 
 
     @Override
-    public Commentaires Update(Long idc, Commentaires commentaire,String email) {
+    public Commentaires Update(Long idc, Commentaires commentaire,String email, String password) {
 
         Personnes r = personne.findByEmail(email);
 
@@ -133,7 +137,7 @@ public class CommentairesImpl implements CommentaireService {
        long idpp = idp.getPersonnes().getIdpersonnes();
 
 
-        if (idcc == idpp){
+        if (idcc == idpp && r.getPassword().equals(password)){
 
             return repo.findById(idc).map(up->{
 
@@ -157,7 +161,7 @@ public class CommentairesImpl implements CommentaireService {
 
             }).orElseThrow(()->new RuntimeException("Commentaire non trouver!"));
         }
-        return null;
+        return commentaire;
 
     }
 

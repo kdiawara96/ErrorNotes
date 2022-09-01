@@ -16,9 +16,9 @@ public class PersonnesControllers {
     private PersonnesServices service;
 
     @GetMapping("/read/{email}/{password}")
-    public Personnes AfficherUser(@PathVariable("email") String email, @PathVariable("password") String password){
+    public Personnes AfficherUser(@PathVariable(value = "email") String email, @PathVariable(value = "password") String password){
        return service.connexion(email, password);
-        }
+    }
 
 
     @DeleteMapping("/deleteUser/{id}/{email}")

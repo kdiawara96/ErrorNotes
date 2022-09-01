@@ -10,13 +10,13 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.Collection;
 
-//Nous avons trois manière de faire l'héritage, soite avec InheritanceType.SINGLE_TABLE
+//Nous avons trois manière de faire l'héritage, soit avec InheritanceType.SINGLE_TABLE
 // Dans se cas Hibernate va creer juste une table dans la base de données pour les deux entité mais
 //Mais l'inconvenient de cette methode est q'elle crée des colonne vide dans la base de données si
 //les deux entités ont des attribut different
 
 
-//Nos AVons encore une autre manière c'est l'InheritanceType.TABLE_PER_CLASS ceci va créer deux tables dans
+//Nous AVons encore une autre manière c'est l'InheritanceType.TABLE_PER_CLASS ceci va créer deux tables dans
 //la base de données et chacun aura ses propres données mais cela à un desanvatage est qu'il aura
 //la rédondance dans la base de données on aura des column répétitive
 

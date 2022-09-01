@@ -16,19 +16,22 @@ public class PersonnesImpl implements PersonnesServices {
     @Override
     public Personnes connexion(String email, String password) {
 
+        //Personnes mail = repo.findByEmail(email);
+        //Personnes pass = repo.findByPassword(password);
 
-
-        Personnes mail = repo.findByEmail(email);
-       Personnes pass = repo.findByPassword(password);
-
-        if (mail != null && pass != null){
-
-        //  Long id =  mail.getIdpersonnes();
-        //repo.findById(id);
-            return mail;
+        Personnes personnes=repo.findByEmailAndPassword(email,password);
+        if(personnes!=null){
+            return  personnes;
         }else {
             return null;
         }
+
+        /*if (mail != null && pass != null && mail.getPassword().equals(password) && mail.getIdpersonnes().equals(pass.getIdpersonnes())){
+
+            return mail;
+        }else {
+            return null;
+        }*/
 
     }
 

@@ -23,9 +23,7 @@ public class AdminsImpl implements AdminsServices {
     public Admins AjouterAdmin(Admins admins) {
 
         Admins admin = new Admins();
-        String aa = admins.getNom().trim();
 
-        System.err.println(aa);
 
         admin.setNom(admins.getNom());
         admin.setPrenom(admins.getPrenom());
@@ -36,7 +34,6 @@ public class AdminsImpl implements AdminsServices {
 
           int a = admins.getPassword().length();
 
-           System.err.println(a);
 
           if(a>=8){
               admin.setPassword(admins.getPassword());

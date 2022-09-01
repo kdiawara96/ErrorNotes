@@ -37,15 +37,17 @@ public class ProblemesImpl implements ProblemesServices {
 
 
     @Override
-    public String DeleteProblemes(String titre, String email) {
+    public String DeleteProblemes(String titre, String email, String password) {
 
        Personnes r = personne.findByEmail(email);
+
+
 
        Problemes tit = blem.findByTitrep(titre);
 
           long id =   tit.getPersonnesp().getIdpersonnes();
 
-       if( id == r.getIdpersonnes()){
+       if( id == r.getIdpersonnes() && r.getPassword().equals(password)){
 
             blem.deleteById(tit.getIdp());
            return "Suppression";
@@ -59,9 +61,10 @@ public class ProblemesImpl implements ProblemesServices {
 
 
     @Override
-    public Boolean Create(Problemes probleme, String email) {
+    public Boolean Create(Problemes probleme, String email ,String password) {
 
         Personnes perso = personne.findByEmail(email);
+
 
        // Problemes titrep = pro.findByTitre(titre);
 
@@ -69,7 +72,7 @@ public class ProblemesImpl implements ProblemesServices {
          // Personnes r = personne.findByEmail(email);
         // Problemes verifier =  blem.findByPersonnesp(r);
 
-        if (personne.findByEmail(email)!= null && sol.findByTitre(probleme.getTitrep()) == null){
+        if (personne.findByEmail(email)!= null && sol.findByTitre(probleme.getTitrep()) == null && perso.getPassword().equals(password)){
 
             probleme.setPersonnesp(perso);
             probleme.setEtats(Etats.INITIAL);
@@ -89,7 +92,7 @@ public class ProblemesImpl implements ProblemesServices {
 
 
     @Override
-    public Problemes Update(String titre, Problemes problemes, String email) {
+    public Problemes Update(String titre, Problemes problemes, String email, String password) {
 
         //verifier si le user == au meme user qui à poster le problème
         /*Personnes r = personne.findByEmail(email);
@@ -98,13 +101,15 @@ public class ProblemesImpl implements ProblemesServices {
 
         Personnes r = personne.findByEmail(email);
 
+
+
         Problemes tit = blem.findByTitrep(titre);
 
         long id =   tit.getPersonnesp().getIdpersonnes();
 
         long idp =tit.getIdp();
 
-        if (id == r.getIdpersonnes()){
+        if (id == r.getIdpersonnes() && r.getPassword().equals(password)){
 
 
             Problemes probl = blem.findByIdp(idp);

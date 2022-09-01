@@ -35,7 +35,7 @@ public class SolutionsImpl implements SolutionServices {
 
 
     @Override
-    public String DeleteSolution(String titre, String email) {
+    public String DeleteSolution(String titre, String email, String password) {
 
         Personnes r = personne.findByEmail(email);
 
@@ -50,7 +50,8 @@ public class SolutionsImpl implements SolutionServices {
         long ids = ttt.getIds();
 
 
-      if (id == r.getIdpersonnes()) {
+
+      if (id == r.getIdpersonnes() && r.getPassword().equals(password)) {
         sol.deleteById(ids);
     
     }else{
@@ -61,7 +62,7 @@ public class SolutionsImpl implements SolutionServices {
 
 
     @Override
-    public Boolean Create(Solutions solution, String email, String titre) {
+    public Boolean Create(Solutions solution, String email, String titre , String password) {
 
 
         Personnes r = personne.findByEmail(email);
@@ -84,7 +85,7 @@ public class SolutionsImpl implements SolutionServices {
 
 
 
-        if (id == r.getIdpersonnes() && solu == null){
+        if (id == r.getIdpersonnes() && solu == null && r.getPassword().equals(password)){
 
            solution.setDatesolution(new Date());
 
@@ -157,22 +158,10 @@ public class SolutionsImpl implements SolutionServices {
 
 
     @Override
-    public Solutions Update(String titre, Solutions solution, String email) {
-
-
-    /*    Personnes r = personne.findByEmail(email);
-
-        Problemes tit = blem.findByTitrep(titre);
-
-        long id =   tit.getPersonnesp().getIdpersonnes();
-
-        long idp =tit.getIdp();
-*/
+    public Solutions Update(String titre, Solutions solution, String email, String password) {
 
 
 
-       // Personnes r = personne.findByEmail(email);
-       // Problemes verifier =  blem.findByPersonnesp(r);
 
 
         Personnes r = personne.findByEmail(email);
@@ -189,7 +178,7 @@ public class SolutionsImpl implements SolutionServices {
 
 
 
-        if (id == r.getIdpersonnes()){
+        if (id == r.getIdpersonnes() && r.getPassword().equals(password)){
 
          // Solutions tion = sol.findByIds(id);
 

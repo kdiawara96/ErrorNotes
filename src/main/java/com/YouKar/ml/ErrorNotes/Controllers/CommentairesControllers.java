@@ -17,20 +17,20 @@ public class CommentairesControllers {
     private CommentaireService service;
 
 
-    @PostMapping("/create/{email}/{titre}")
-    public ResponseEntity<Object> creerCommentaire(@RequestBody Commentaires commentaire, @PathVariable("email") String email, @PathVariable("titre") String titre){
+    @PostMapping("/create/{email}/{password}/{titre}")
+    public ResponseEntity<Object> creerCommentaire(@RequestBody Commentaires commentaire, @PathVariable("email") String email, @PathVariable("password") String password,@PathVariable("titre") String titre){
 
-        return Messages.Response("", HttpStatus.OK,service.Create(commentaire, email, titre));
+        return Messages.Response("", HttpStatus.OK,service.Create(commentaire, email,password, titre));
     }
 
 
 
-    @PutMapping("/update/{idc}/{email}")
+    @PutMapping("/update/{idc}/{email}/{password}")
 
-    public ResponseEntity<Object> updateCommentaires(@PathVariable("idc") Long idc, @RequestBody Commentaires commentaires, @PathVariable("email") String email){
+    public ResponseEntity<Object> updateCommentaires(@PathVariable("idc") Long idc, @RequestBody Commentaires commentaires, @PathVariable("email") String email, @PathVariable("password") String password){
 
         try{
-           return Messages.Response("Modifier avec success", HttpStatus.OK, service.Update(idc,commentaires, email));
+           return Messages.Response("Modifier avec success", HttpStatus.OK, service.Update(idc,commentaires, email, password));
         }catch(Exception e){
             return Messages.Response("Erreur survenu lors de la modification du commentaire", HttpStatus.OK, null);
         }
@@ -39,11 +39,11 @@ public class CommentairesControllers {
 
 
 
-    @DeleteMapping("/delete/{idc}/{email}")
-    public ResponseEntity<Object> supprimerPays(@PathVariable("idc") Long idc, @PathVariable("email") String email){
+    @DeleteMapping("/delete/{idc}/{email}/{password}")
+    public ResponseEntity<Object> supprimerPays(@PathVariable("idc") Long idc, @PathVariable("email") String email, @PathVariable("password") String password){
     
         try {
-            return Messages.Response("Commentaire supprimer avec succès!", HttpStatus.OK, service.DeleteCommentaire(idc, email)) ;
+            return Messages.Response("Commentaire supprimer avec succès!", HttpStatus.OK, service.DeleteCommentaire(idc, email, password)) ;
         }catch (Exception e) {
             return Messages.Response("Commentaire non supprimer!", HttpStatus.OK,null) ;
 
