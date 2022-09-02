@@ -11,9 +11,10 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface Solutions_repo extends JpaRepository<Solutions, Long> {
 
-    Solutions findByTitre(String titre);
-    Solutions findByProbleme(Problemes problemes);
+    Solutions findByTitre(String titres);
     Solutions findByIds(Long ids);
+    Solutions findByProbleme(Problemes problemes);
+
 
     //@Query(value = "UPDATE solutions SET  etoiles=:etoiles  WHERE ids=:ids", nativeQuery = true)
     //Solutions addOrSousEtoile(int value,long ids);

@@ -21,7 +21,7 @@ public class SolutionControllers {
     @PostMapping("/create/{email}/{password}/{titre}")
     public ResponseEntity<Object> ajouterSolution(@RequestBody Solutions solution, @PathVariable("email") String email, @PathVariable("titre") String titre , @PathVariable("password") String password){
         try {
-            return Messages.Response(null, HttpStatus.OK, service.Create(solution, email,password,titre));
+            return Messages.Response(null, HttpStatus.OK, service.Create(solution, email,titre,password));
         }catch (Exception e){
             return Messages.Response("Problème non commenter", HttpStatus.OK, null);
         }
